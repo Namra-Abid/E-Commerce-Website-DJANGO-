@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shopify',
         'USER':'root',
-        'PASSWORD':'namra',
+        'PASSWORD':'',
         'HOST':'127.0.0.1',
         'PORT':'3306',
     }
