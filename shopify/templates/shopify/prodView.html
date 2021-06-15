@@ -1,0 +1,69 @@
+{% extends 'shopify/layout.html'%}
+{% block title %}
+    {{product.product_name}}-Shopify
+{% endblock %}
+
+
+{% block body %}
+
+        <div class="container my-4">
+          <div class="row">
+
+            <div class="col-md-4">
+                <div class="row">
+                   <img src="/media/{{product.image}}" width="233px" height="300">
+                </div>
+                <div class="row">
+                  <br>
+                  <button class="btn btn-info mx-3 my-3" type="submit" style="background-color:#BA55D3; border:#DDA0DD"> Buy Now</button>
+                  <br>
+                  <button class="btn btn-info mx-3 my-3" type="submit" style="background-color:#BA55D3; border:#DDA0DD">Add to Cart</button>
+                </div>
+
+            </div>
+            <span class="border border-secondary">
+            <div class="col-md-8">
+                   <h5> {{product.product_name}}</h5>
+
+                   <p> <b>  Rs. {{product.price}}</b></p>
+                    <p>{{product.product_description}}</p>
+            </div>
+            </span>
+
+          </div>
+        </div>
+
+
+{% endblock %}
+{% block js %}
+
+<script >
+console.log('working');
+if (localStorage.getItem('cart')==null){
+  var cart={};
+}
+else{
+  cart=JSON.parse(localStorage.getItem('cart'));
+    document.getElementById('cart').innerHTML=Object.keys(cart).length;
+}
+
+$('.cart').click(function(){
+  console.log('clicked');
+  var idstr=this.id.toString();
+  console.log(idstr);
+  if (cart[idstr]!=undefined){
+    cart[idstr]=cart[idstr]+1;
+  }
+  else{
+    cart[idstr]=1;
+  }
+  console.log(cart);
+  localStorage.setItem('cart',JSON.stringify(cart));
+  document.getElementById('cart').innerHTML=Object.keys(cart).length;
+
+});
+$('#popcart').popover();
+document.getElementById("popcart").setAttribute('data-content','<h5> Cart </h5>');
+
+</script>
+ {% endblock %}
